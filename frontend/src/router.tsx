@@ -11,11 +11,46 @@ import { SecuritySettingsPage } from './pages/SecuritySettingsPage'
 import { ComingSoonPage } from './pages/ComingSoonPage'
 import { NotFoundPage } from './pages/NotFoundPage'
 import { ProtectedRoute } from './components/auth/ProtectedRoute'
+import { MainLayout } from './components/layout/MainLayout'
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <LandingPage />,
+    element: <MainLayout />,
+    children: [
+      {
+        index: true,
+        element: <LandingPage />,
+      },
+      {
+        path: 'feed',
+        element: (
+          <ProtectedRoute>
+            <ComingSoonPage title="Research Feed" />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'forum',
+        element: <ComingSoonPage title="Community Forum" />,
+      },
+      {
+        path: 'supervisors',
+        element: <ComingSoonPage title="Supervisor Directory" />,
+      },
+      {
+        path: 'blog',
+        element: <ComingSoonPage title="Zosterix Blog" />,
+      },
+      {
+        path: 'settings/security',
+        element: (
+          <ProtectedRoute>
+            <SecuritySettingsPage />
+          </ProtectedRoute>
+        ),
+      },
+    ],
   },
   {
     path: '/login',
@@ -42,40 +77,12 @@ export const router = createBrowserRouter([
     element: <OAuthCallbackPage />,
   },
   {
-    path: '/feed',
-    element: (
-      <ProtectedRoute>
-        <ComingSoonPage title="Research Feed" />
-      </ProtectedRoute>
-    ),
-  },
-  {
     path: '/profile/setup',
     element: (
       <ProtectedRoute>
         <ProfileSetupPage />
       </ProtectedRoute>
     ),
-  },
-  {
-    path: '/settings/security',
-    element: (
-      <ProtectedRoute>
-        <SecuritySettingsPage />
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: '/forum',
-    element: <ComingSoonPage title="Community Forum" />,
-  },
-  {
-    path: '/supervisors',
-    element: <ComingSoonPage title="Supervisor Directory" />,
-  },
-  {
-    path: '/blog',
-    element: <ComingSoonPage title="Zosterix Blog" />,
   },
   {
     path: '*',

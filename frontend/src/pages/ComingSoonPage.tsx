@@ -1,26 +1,29 @@
 import { Link } from 'react-router-dom'
-import { Timer, ArrowLeft } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Timer, Bell } from 'lucide-react'
 
-export function ComingSoonPage() {
+export function ComingSoonPage({ title }: { title: string }) {
   return (
-    <div className="flex min-h-[70vh] flex-col items-center justify-center text-center py-20">
-      <div className="mb-8 flex h-20 w-20 items-center justify-center rounded-3xl bg-zinc-50 text-black">
-        <Timer size={40} strokeWidth={1.5} />
+    <div className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+      <div className="w-20 h-20 rounded-3xl bg-zinc-50 flex items-center justify-center mb-8 border border-zinc-100">
+        <Timer className="w-10 h-10 text-black" />
       </div>
-      <h1 className="mb-4 text-4xl font-black tracking-tighter text-black sm:text-5xl">
-        Coming <span className="text-zinc-400">Soon.</span>
-      </h1>
-      <p className="mx-auto mb-12 max-w-md text-lg text-zinc-500">
-        We're currently refining this module to provide you with the best academic experience. 
-        Stay tuned for the official launch.
+      <h1 className="text-4xl md:text-6xl font-black tracking-tighter mb-4">{title}</h1>
+      <p className="text-zinc-500 font-medium max-w-md mx-auto text-lg mb-12">
+        We are meticulously crafting this module to ensure it meets our rigorous standards for academic collaboration.
       </p>
-      <Link 
-        to="/" 
-        className="inline-flex items-center gap-2 rounded-xl bg-black px-8 py-3 font-bold text-white transition-all hover:bg-zinc-800"
-      >
-        <ArrowLeft size={18} />
-        Back to Dashboard
-      </Link>
+      
+      <div className="flex flex-col sm:flex-row gap-4 justify-center w-full max-w-sm">
+        <Button className="rounded-xl px-8 py-6 font-bold flex-1 flex items-center gap-2">
+          <Bell size={18} />
+          Notify Me
+        </Button>
+        <Link to="/" className="flex-1">
+          <Button variant="outline" className="w-full rounded-xl px-8 py-6 font-bold">
+            Explore Beta
+          </Button>
+        </Link>
+      </div>
     </div>
   )
 }

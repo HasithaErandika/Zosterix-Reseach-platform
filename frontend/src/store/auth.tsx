@@ -5,10 +5,10 @@ import { setAccessTokenInMemory } from './tokenStore';
 interface User {
   id: string;
   email: string;
-  fullName: string;
+  full_name: string;
   role: 'researcher' | 'student' | 'supervisor' | 'administrator';
-  supervisorStatus: 'none' | 'pending_verification' | 'verified' | 'rejected';
-  profileComplete: boolean;
+  supervisor_status: 'none' | 'pending_verification' | 'verified' | 'rejected';
+  profile_complete: boolean;
 }
 
 interface AuthState {

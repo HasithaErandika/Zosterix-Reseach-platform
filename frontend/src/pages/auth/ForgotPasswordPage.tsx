@@ -51,70 +51,72 @@ export function ForgotPasswordPage() {
 
   if (isSuccess) {
     return (
-      <div className="flex min-h-[90vh] items-center justify-center p-4">
-        <Card className="w-full max-w-[480px] text-center border-none shadow-none">
-          <CardHeader>
-            <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-zinc-50">
-              <Mail className="h-8 w-8 text-black" />
-            </div>
-            <CardTitle className="text-2xl font-black tracking-tighter">Check your email</CardTitle>
-            <CardDescription className="text-zinc-500">
-              If <span className="font-bold text-black">{email}</span> is registered, you will receive a reset link shortly.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Link to="/login">
-              <Button variant="outline" className="w-full rounded-xl py-6 font-bold">
-                Return to Login
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
+      <div className="flex min-h-[90vh] items-center justify-center px-6">
+        <div className="w-full max-w-[440px] text-center">
+          <div className="mx-auto mb-8 flex h-24 w-24 items-center justify-center rounded-[2.5rem] bg-zinc-50 border border-zinc-100">
+            <Mail className="h-10 w-10 text-black" />
+          </div>
+          <h1 className="text-4xl font-black tracking-tighter mb-4">Check your email</h1>
+          <p className="text-zinc-500 font-medium leading-relaxed mb-10">
+            If <span className="font-black text-black">{email}</span> is registered, you will receive a reset link shortly.
+          </p>
+          <Link to="/login">
+            <Button variant="outline" className="w-full rounded-2xl py-8 font-bold border-zinc-100 hover:bg-zinc-50 transition-all">
+              Return to Login
+            </Button>
+          </Link>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center p-4">
-      <Card className="w-full max-w-[480px] border-none shadow-none">
-        <CardHeader>
-          <Link to="/login" className="flex items-center gap-2 text-sm font-bold text-zinc-400 hover:text-black mb-6">
-            <ArrowLeft size={16} />
-            Back to login
+    <div className="relative flex min-h-screen items-center justify-center bg-white px-6">
+      <Link 
+        to="/login" 
+        className="absolute left-6 top-6 md:left-12 md:top-12 flex items-center gap-2 text-sm font-bold text-zinc-400 hover:text-black transition-colors"
+      >
+        <ArrowLeft size={18} />
+        <span>Back to Login</span>
+      </Link>
+
+      <div className="w-full max-w-[440px]">
+        <div className="mb-12 text-center">
+          <Link to="/" className="text-2xl font-black tracking-tighter text-black">
+            ZOSTERIX<span className="text-zinc-300">.</span>
           </Link>
-          <CardTitle className="text-3xl font-black tracking-tighter">Reset your password</CardTitle>
-          <CardDescription>Enter your email and we'll send you a link to reset your password.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          {error && (
-            <Alert variant="destructive" className="mb-6 rounded-xl">
-              <AlertDescription>{error}</AlertDescription>
-            </Alert>
-          )}
+          <h1 className="mt-8 text-4xl font-black tracking-tighter">Reset password</h1>
+          <p className="mt-2 text-zinc-500 font-medium">We'll send you a recovery link.</p>
+        </div>
 
-          <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-xs font-bold uppercase tracking-widest text-zinc-400">Email Address</FormLabel>
-                    <FormControl>
-                      <Input placeholder="amal@example.com" type="email" className="rounded-xl border-zinc-200 py-6" {...field} autoFocus />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+        {error && (
+          <Alert variant="destructive" className="mb-8 rounded-2xl border-red-50 bg-red-50/10">
+            <AlertDescription className="font-bold">{error}</AlertDescription>
+          </Alert>
+        )}
 
-              <Button type="submit" disabled={isLoading} className="w-full rounded-xl py-6 font-bold">
-                {isLoading ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : 'Send Reset Link'}
-              </Button>
-            </form>
-          </Form>
-        </CardContent>
-      </Card>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-xs font-bold uppercase tracking-widest text-zinc-400">Email Address</FormLabel>
+                  <FormControl>
+                    <Input placeholder="amal@example.com" type="email" className="rounded-2xl border-zinc-100 bg-zinc-50 px-4 py-7 focus:bg-white transition-all" {...field} autoFocus />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <Button type="submit" disabled={isLoading} className="w-full rounded-2xl py-8 text-lg font-black tracking-tight">
+              {isLoading ? <Loader2 className="mr-2 h-5 w-5 animate-spin" /> : 'Send Recovery Link'}
+            </Button>
+          </form>
+        </Form>
+      </div>
     </div>
   )
 }
