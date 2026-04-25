@@ -9,6 +9,7 @@ import (
 
 func Recovery() gin.HandlerFunc {
 	return gin.CustomRecovery(func(c *gin.Context, recovered interface{}) {
-		c.AbortWithStatusJSON(http.StatusInternalServerError, shared.Fail("internal_server_error"))
+		shared.Fail(c, http.StatusInternalServerError, "Internal Server Error")
+		c.Abort()
 	})
 }

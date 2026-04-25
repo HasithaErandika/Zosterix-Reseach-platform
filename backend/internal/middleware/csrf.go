@@ -17,7 +17,8 @@ func CSRFMiddleware() gin.HandlerFunc {
 
 		token := c.GetHeader("X-CSRF-Token")
 		if strings.TrimSpace(token) == "" {
-			c.AbortWithStatusJSON(http.StatusForbidden, shared.Fail("csrf_token_required"))
+			shared.Fail(c, http.StatusForbidden, "CSRF token required")
+			c.Abort()
 			return
 		}
 		c.Next()
