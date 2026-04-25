@@ -1,51 +1,58 @@
 package shared
 
 import (
-	"fmt"
 	"os"
+	"github.com/joho/godotenv"
+	"github.com/rs/zerolog/log"
 )
 
 type Config struct {
-	Port             string
-	DatabaseURL      string
-	RedisURL         string
-	JWTSecret        string
-	JWTRefreshSecret string
-	AppURL           string
-	APIURL           string
-	FrontendOrigin   string
+	Port               string
+	DatabaseURL        string
+	RedisURL           string
+	JWTSecret          string
+	JWTRefreshSecret   string
+	GoogleClientID     string
+	GoogleClientSecret string
+	GoogleRedirectURI  string
+	ResendAPIKey       string
+	EmailFrom          string
+	AppURL             string
+	APIURL             string
+	FrontendOrigin     string
+	Environment        string
 }
 
-func LoadConfig() Config {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
+func LoadConfig() *Config {
+	_ = godotenv.Load()
+
+	config := &Config{
+		Port:               getEnv("PORT", "8080"),
+		DatabaseURL:        os.Getenv("DATABASE_URL"),
+		RedisURL:           os.Getenv("REDIS_URL"),
+		JWTSecret:          os.Getenv("JWT_SECRET"),
+		JWTRefreshSecret:   os.Getenv("JWT_REFRESH_SECRET"),
+		GoogleClientID:     os.Getenv("GOOGLE_CLIENT_ID"),
+		GoogleClientSecret: os.Getenv("GOOGLE_CLIENT_SECRET"),
+		GoogleRedirectURI:  os.Getenv("GOOGLE_REDIRECT_URI"),
+		ResendAPIKey:       os.Getenv("RESEND_API_KEY"),
+		EmailFrom:          getEnv("EMAIL_FROM", "noreply@zosterix.com"),
+		AppURL:             getEnv("APP_URL", "http://localhost:5173"),
+		APIURL:             getEnv("API_URL", "http://localhost:8080"),
+		FrontendOrigin:     getEnv("FRONTEND_ORIGIN", "http://localhost:5173"),
+		Environment:        getEnv("GIN_MODE", "debug"),
 	}
 
-	return Config{
-		Port:             port,
-		DatabaseURL:      os.Getenv("DATABASE_URL"),
-		RedisURL:         os.Getenv("REDIS_URL"),
-		JWTSecret:        os.Getenv("JWT_SECRET"),
-		JWTRefreshSecret: os.Getenv("JWT_REFRESH_SECRET"),
-		AppURL:           os.Getenv("APP_URL"),
-		APIURL:           os.Getenv("API_URL"),
-		FrontendOrigin:   os.Getenv("APP_URL"),
+	if config.DatabaseURL == "" {
+		log.Warn().Msg("DATABASE_URL is not set")
 	}
+
+	return config
 }
 
-func (c Config) Validate() error {
-	required := map[string]string{
-		"DATABASE_URL":       c.DatabaseURL,
-		"REDIS_URL":          c.RedisURL,
-		"JWT_SECRET":         c.JWTSecret,
-		"JWT_REFRESH_SECRET": c.JWTRefreshSecret,
+func getEnv(key, fallback string) string {
+	if value, ok := os.LookupEnv(key); ok {
+		return value
 	}
-
-	for k, v := range required {
-		if v == "" {
-			return fmt.Errorf("missing required env: %s", k)
-		}
-	}
-	return nil
+	return fallback
 }
