@@ -67,6 +67,11 @@ func main() {
 	}))
 
 	// Routes
+	// Root route
+	r.GET("/", func(c *gin.Context) {
+		c.JSON(200, gin.H{"status": "ok", "message": "Zosterix API is running"})
+	})
+
 	api := r.Group("/api/v1")
 
 	// Public Auth Routes
