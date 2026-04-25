@@ -32,9 +32,14 @@ export function VerifyEmailPage() {
   }, [token])
 
   return (
-    <div className="flex min-h-[90vh] items-center justify-center p-4">
+    <div className="flex min-h-[90vh] flex-col items-center justify-center p-4">
+      <div className="mb-6 flex flex-col items-center">
+        <Link to="/">
+          <img src="/zosterix.svg" alt="Zosterix" className="h-36 w-auto" />
+        </Link>
+      </div>
       <Card className="w-full max-w-[480px] text-center border-none shadow-none">
-        <CardContent className="pt-6">
+        <CardContent>
           {status === 'loading' && (
             <div className="flex flex-col items-center gap-4">
               <Loader2 className="h-12 w-12 animate-spin text-zinc-300" />

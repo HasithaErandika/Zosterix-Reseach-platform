@@ -7,8 +7,8 @@ export function Footer() {
       <div className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
           <div className="col-span-1 md:col-span-1 space-y-4">
-            <Link to="/" className="text-2xl font-black tracking-tighter text-black">
-              ZOSTERIX<span className="text-zinc-300">.</span>
+            <Link to="/" className="flex items-center">
+              <img src="/zosterix.svg" alt="Zosterix" className="h-10 w-auto" />
             </Link>
             <p className="text-sm text-zinc-500 leading-relaxed max-w-xs">
               The premium platform for research collaboration and academic networking. Built for the next generation of scholars.

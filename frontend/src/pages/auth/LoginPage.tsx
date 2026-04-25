@@ -73,11 +73,11 @@ export function LoginPage() {
       </Link>
 
       <div className="w-full max-w-[440px]">
-        <div className="mb-10 text-center">
-          <Link to="/" className="text-3xl font-black tracking-tighter text-black">
-            ZOSTERIX<span className="text-zinc-300">.</span>
+        <div className="mb-6 text-center flex flex-col items-center">
+          <Link to="/">
+            <img src="/zosterix.svg" alt="Zosterix" className="h-36 w-auto" />
           </Link>
-          <h1 className="mt-6 text-3xl font-black tracking-tighter">Welcome back</h1>
+          <h1 className="mt-4 text-3xl font-black tracking-tighter">Welcome back</h1>
           <p className="mt-2 text-zinc-500 font-medium">Continue your research journey.</p>
         </div>
 

@@ -102,8 +102,11 @@ export function ResetPasswordPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-white px-6">
       <div className="w-full max-w-[440px]">
-        <div className="mb-12 text-center">
-          <h1 className="text-4xl font-black tracking-tighter">New password</h1>
+        <div className="mb-6 text-center flex flex-col items-center">
+          <Link to="/">
+            <img src="/zosterix.svg" alt="Zosterix" className="h-36 w-auto" />
+          </Link>
+          <h1 className="mt-4 text-4xl font-black tracking-tighter">New password</h1>
           <p className="mt-2 text-zinc-500 font-medium">Create a strong, unique password.</p>
         </div>
 

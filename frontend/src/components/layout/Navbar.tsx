@@ -22,9 +22,8 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-100 bg-white/70 backdrop-blur-xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        {/* Logo */}
-        <Link to="/" className="text-2xl font-black tracking-tighter text-black flex items-center gap-1">
-          ZOSTERIX<span className="text-zinc-300">.</span>
+        <Link to="/" className="flex items-center">
+          <img src="/zosterix.svg" alt="Zosterix" className="h-16 w-auto" />
         </Link>
 
         {/* Desktop Navigation */}
