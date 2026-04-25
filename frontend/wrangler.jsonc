@@ -1,0 +1,13 @@
+{
+  "name": "zosterix-frontend",
+  "compatibility_date": "2026-04-25",
+  "pages_build_output_dir": "dist",
+  "vars": {
+    "VITE_API_URL": "https://api.zosterix.com" // Replace with your production API URL
+  },
+  "env": {
+    "production": {
+      "name": "zosterix-frontend-production"
+    }
+  }
+}
